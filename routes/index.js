@@ -1,13 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
+const models = require('../models');
+const {sequelize,Sequelize} = models;
+
 const authController = require('../controllers/authController');
 const mainController = require('../controllers/mainController');
 
 
-router.get('/test',(req,res)=>{
-    res.send('all working');
-})
+router.get('/heartbeat',(req,res)=>{
+    models.Users.findOne({
+        where:{
+            username:'admin'
+        }
+    }).then((d)=>{
+        console.log('all working');
+        res.send('all working');
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).send({err})
+    })
+    
+});
 
 router.post('/login',authController.login);
 router.get('/logout',authController.logout);
