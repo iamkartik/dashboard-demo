@@ -1,6 +1,8 @@
 import { FETCH_COUNTRY_SECTOR_AGG, FETCH_SECTOR_ACTIVITY_AGG } from "../actions/actions";
 
-
+/**
+ * Reducer for page one Aggregate queries
+ */
 
 export default function(state={},action){
     let  newState={};

@@ -9,15 +9,17 @@ import PageTwo from './components/PageTwo';
 import {connect} from 'react-redux';
 import {fetchUser} from './actions';
 
-
+/**
+ * This class is the root of the application all routes are defind here
+ */
 class App extends Component {
-
+  // checking if user is already logged in with current_user api once the app loads
   componentDidMount(){
-    console.log('mounted');
     this.props.fetchUser();
-}
+  }
 
   render() {
+    // frontend routing amongst components
     return (
       <BrowserRouter>
         <Switch>
@@ -30,27 +32,10 @@ class App extends Component {
     );
   }
 }
-
+// getting redux state to map to props
 function mapStateToProps(state){
   return state;
 }
-
+// wiring up the react and redux state
 export default connect(mapStateToProps,{fetchUser})(App);
 
-/* 
-<div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div> */

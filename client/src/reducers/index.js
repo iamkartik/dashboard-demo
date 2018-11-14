@@ -5,6 +5,9 @@ import homeReducer from './homeReducer';
 import geoReducer from './geoReducer';
 import aggReducer from './aggReducer';
 
+/**
+ * This file contains the combination  of all reducers inside the application
+ */
 const appReducer = combineReducers({
     auth:authReducer,
     home:homeReducer,
@@ -12,6 +15,7 @@ const appReducer = combineReducers({
     agg:aggReducer
 });
 
+// root reducer changes the state of app to undefined incase of logout
 const rootReducer = (state,action)=>{
     if(action.type===LOGOUT_USER){
         state = undefined;

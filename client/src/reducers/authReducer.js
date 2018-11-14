@@ -1,5 +1,9 @@
 import { LOGIN_USER, LOGOUT_USER, FETCH_USER } from "../actions/actions";
 
+/**
+ * Reducer responsible for authentication
+ */
+
 const initialState={
     isAuthenticated:false
 }
@@ -9,7 +13,6 @@ export default function(state=initialState,action){
     switch (action.type) {
         case LOGIN_USER:
             let {data} = action.payload;
-            console.log(data.err?false:true);
             newState["isAuthenticated"] = data.err?false:true;
             newState = {...newState,data};
             return newState;    

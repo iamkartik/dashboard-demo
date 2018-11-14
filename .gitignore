@@ -3,3 +3,4 @@ package-lock.json
 bcrypt.js
 cient/node_modules
 client/package-lock.json
+migrations/

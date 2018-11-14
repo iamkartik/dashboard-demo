@@ -1,3 +1,7 @@
+/**
+ * This file is the Object mapper for the main Loans table where all the data is stored.
+ * Using this Object to fetch all the analytics.
+ */
 'use strict';
 const Sequelize = require('sequelize');
 

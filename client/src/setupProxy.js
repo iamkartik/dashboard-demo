@@ -1,3 +1,6 @@
+/**
+ * Proxy file to forward ports in case of development setup
+ */
 const proxy = require('http-proxy-middleware')
  
 module.exports = function(app) {

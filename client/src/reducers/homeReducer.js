@@ -1,6 +1,8 @@
 import { FETCH_REGION_COUNT, FETCH_ACTIVITY_COUNT, FETCH_COUNTRY_COUNT, FETCH_SECTOR_COUNT } from "../actions/actions";
 
-
+/** 
+ * Reducer for the home page
+*/
 
 export default function(state={},action){
     let  newState={};

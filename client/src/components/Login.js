@@ -4,6 +4,10 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Header from './Header';
 
+/**
+ * This class contains the login component , 
+ * based on the auth value the user is logged in / logged out 
+ */
 
 class Login extends Component{
     constructor(props){
@@ -13,14 +17,14 @@ class Login extends Component{
             password:''
         }
     }
-
+    // call login 
     login=()=>{
         const {username,password} = this.state;
         if(username!=='' && password!==''){
             this.props.loginUser(username,password);
         }
     }
-
+    // form event change
     handleChange=(prop)=>(event)=>{
         this.setState({[prop]:event.target.value});
     }

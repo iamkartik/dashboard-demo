@@ -5,16 +5,20 @@ import {logoutUser,fetchCountrySum} from '../actions';
 import Header from './Header';
 import {Chart} from 'react-google-charts';
 
-
+/**
+ * This class displays a geo chart inside the application
+ */
 class PageTwo extends Component{
 
     componentDidMount(){
+        // getting a country->total loan amount combo
         this.props.fetchCountrySum();
     }    
 
     createChartData(data){
+        // defaullt headers for google charts
         let renderData=[["Country","Total Loan Value(USD)"]];
-        console.log(data);
+        
         if(data && data.sum && data.sum.length>0){
             const {sum} = data; 
             for(let i=0;i<sum.length;i++){

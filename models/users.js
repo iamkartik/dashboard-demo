@@ -1,7 +1,11 @@
+/**
+ * This file contains the user model and its configurations and data types
+ * User model primarily used for logging in 
+ * 
+ */
+
 'use strict';
-
 const Sequelize = require('sequelize');
-
 
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {

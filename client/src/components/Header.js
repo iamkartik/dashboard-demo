@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logoutUser} from '../actions';
 
+/**
+ * This class renders the common header component in all the pages
+ */
 class Header extends Component{
 
     renderNav(auth){
@@ -24,7 +27,7 @@ class Header extends Component{
         <div className="navbar-fixed">    
             <nav className="header-nav">
                 <div className="nav-wrapper">
-                    <Link to="/home" className="main-logo brand-logo">Logo</Link>                
+                    <Link to="/home" className="main-logo brand-logo">Kiva</Link>                
                         {this.renderNav(this.props.auth)}
                 </div>
             </nav>

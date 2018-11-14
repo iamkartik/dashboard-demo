@@ -1,3 +1,9 @@
+/**
+ * This file contains the authentication parameters and strategy to 
+ * login a user.
+ * All the configurations for passport js are done here , and finally 
+ * the exposed passport object is added inside app.js
+ */
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const models = require('../models');

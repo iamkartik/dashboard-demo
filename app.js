@@ -1,3 +1,8 @@
+/**
+ * This file contains all the express configuration and the middlewares
+ * that are attached to it.
+ */
+
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -6,7 +11,7 @@ const passport = require('passport');
 const routes = require('./routes')
 const path = require('path');
 
-// importing passport authentication straategy
+// importing passport authentication strategy
 require('./handlers/passport');
 
 // express app

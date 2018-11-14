@@ -1,6 +1,9 @@
 import { FETCH_COUNTRY_SUM } from "../actions/actions";
 
 
+/** 
+ * Reducer for pageTwo geo chart
+*/
 
 export default function(state={},action){
     let  newState={};

@@ -5,10 +5,13 @@ import {logoutUser,fetchCountrySectorAgg,fetchSectorActivityAgg} from '../action
 import Header from './Header';
 import {Bar} from 'react-chartjs-2';
 
-
+/** This class displayes two stacked bar graphs
+ * 
+ */
 class PageOne extends Component{
 
     componentDidMount(){
+        // get sector/activity and country/sector aggregations
         this.props.fetchCountrySectorAgg(10);
         this.props.fetchSectorActivityAgg(10);
     }
@@ -30,7 +33,7 @@ class PageOne extends Component{
 
             // get the aggregate sagg/csagg
             let aggregate = data[cat];
-            console.log(aggregate);
+            
             // datasets array for storing stacked charts
             let datasets = [];
             // get the no of keys in sagg/agg 's data field to iterate and
@@ -45,7 +48,6 @@ class PageOne extends Component{
                 // get the keys these will be the labels for each bar
                 let subLabels = Object.keys(aggregate.data[aggdata[i]]);
 
-                console.log(sdata,subLabels)
                 for(let j=0;j<sdata.length;j++){
                     // individual bar dataset object
                     let dataset ={};
@@ -59,10 +61,11 @@ class PageOne extends Component{
             renderData["datasets"] = datasets;
             //renderData["labels"]=aggregate.mainCategory.map((e,i)=>i);
         }
-        console.log(renderData);
+        
         return renderData;
     }
 
+    // These options allow chart js to stack charts
     barChartOptions(data,cat){
         let options ={};
         if(data && data[cat] && Object.keys(data[cat]).length>0){
@@ -72,7 +75,6 @@ class PageOne extends Component{
                   stacked: true,
                   ticks:{
                       callback:function(value,index,values){
-                          console.log(data[cat]["mainCategory"][index]);
                         return value;
                       }
                   }

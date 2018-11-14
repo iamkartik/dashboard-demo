@@ -13,12 +13,5 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  },
-  "production": {
-    "username": "be3bce6d110e3a",
-    "password": "7e5f2ba9",
-    "database": "heroku_af0047ba8c3033a",
-    "host": "us-cdbr-iron-east-01.cleardb.net",
-    "dialect": "mysql"
   }
 }
