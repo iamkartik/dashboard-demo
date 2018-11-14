@@ -9,7 +9,7 @@
     "client": "npm run start --prefix client",
     "server": "nodemon start.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prod": "NODE_ENV=production start"
+    "prod": "NODE_ENV=production node start.js"
   },
   "author": "iamkartik",
   "license": "ISC",
