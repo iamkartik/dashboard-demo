@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_USER, LOGOUT_USER, FETCH_USER, FETCH_COUNTRY_COUNT, FETCH_SECTOR_COUNT, FETCH_REGION_COUNT, FETCH_ACTIVITY_COUNT, FETCH_COUNTRY_SUM, FETCH_COUNTRY_SECTOR_AGG, FETCH_SECTOR_ACTIVITY_AGG } from './actions';
+import { LOGIN_USER, LOGOUT_USER, FETCH_USER, FETCH_COUNTRY_COUNT, FETCH_SECTOR_COUNT, FETCH_REGION_COUNT, FETCH_ACTIVITY_COUNT, FETCH_COUNTRY_SUM, FETCH_COUNTRY_SECTOR_AGG, FETCH_SECTOR_ACTIVITY_AGG, FETCH_SECTOR_AVG, FETCH_COUNTRY_AVG } from './actions';
 
 
 /**
@@ -87,5 +87,21 @@ export const fetchSectorActivityAgg=(no)=>{
     return async (dispatch)=>{
         const s_agg = await axios.get(`/analytics/agg/sector/activity/${no}`,{withCredentials:true});
         dispatch({type:FETCH_SECTOR_ACTIVITY_AGG,payload:s_agg});
+    }
+}
+
+// get the average loan amount across sectors
+export const fetchSectorAverage = (no)=>{
+    return async (dispatch)=>{
+        const sector = await axios.get(`/analytics/agg/loan_amount/sector/${no}`,{withCredentials:true});
+        dispatch({type:FETCH_SECTOR_AVG,payload:sector});
+    }
+}
+
+// get the average loan amount across countries
+export const fetchCountryAverage = (no)=>{
+    return async (dispatch)=>{
+        const sector = await axios.get(`/analytics/agg/loan_amount/country/${no}`,{withCredentials:true});
+        dispatch({type:FETCH_COUNTRY_AVG,payload:sector});
     }
 }

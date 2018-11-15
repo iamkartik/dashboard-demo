@@ -8,7 +8,7 @@ const authController = require('../controllers/authController');
 const mainController = require('../controllers/mainController');
 
 // to test the server and db connection
-router.get('/heartbeat',);
+router.get('/heartbeat',mainController.heartbeat);
 
 // login ,logout routes
 router.post('/login',authController.login);
@@ -23,6 +23,9 @@ router.get('/analytics/country/sum',authController.isLoggedIn,mainController.get
 
 router.get('/analytics/total/:area/:no',authController.isLoggedIn,mainController.getTotalData);
 
+router.get('/analytics/agg/:amt/:area/:no',mainController.getAvgAggregateData);
+
 router.get('/analytics/agg/:main/:sub/:no',authController.isLoggedIn,mainController.getAggregateData);
+
 
 module.exports=router;

@@ -137,3 +137,39 @@ module.exports.heartbeat = (req,res)=>{
     });
     
 }
+
+/**
+ * This function gets the average amount(lend/fund) across an area
+ */
+module.exports.getAvgAggregateData=(req,res)=>{
+    const {amt,area,no} = req.params;
+
+    // sanitizing input
+    if(isNaN(no)){
+        return res.status(422).send({err:'Malformed query ,no can only be a number'});
+    }
+
+    const areas =['sector','country','activity','region'];
+
+    if((areas.indexOf(area)===-1)){
+        return res.status(422).send({err:'Malformed query,parms should be in "sector,country,activity"'});
+    }
+
+    const amount= ['loan_amount','funded_amount']
+    if((amount.indexOf(amt)===-1)){
+        return res.status(422).send({err:'Malformed query,'});
+    }
+
+    models.Loans.findAll({
+        attributes:[`${area}`,[models.sequelize.fn('avg',models.sequelize.col(`${amt}`)),'amount']],
+        group:[`${area}`]
+        
+     }).then(data=>{
+        // send response 
+        const result = data.map(d=>d.dataValues);
+        res.status(200).send({data:result});
+    }).catch((err)=>{
+        // send error in case of error
+        res.status(500).send({err:'Something went wrong we are looking into it'});
+    });
+}

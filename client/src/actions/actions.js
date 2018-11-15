@@ -11,3 +11,6 @@ export const FETCH_ACTIVITY_COUNT = 'fetch_activity_count';
 export const FETCH_COUNTRY_SUM = 'fetch_country_sum';
 export const FETCH_SECTOR_ACTIVITY_AGG= 'fetch_sector_activity_agg';
 export const FETCH_COUNTRY_SECTOR_AGG = 'fetch_country_sector_agg';
+export const FETCH_SECTOR_AVG= 'fetch_sector_avg';
+export const FETCH_COUNTRY_AVG = 'fetch_country_avg';
+

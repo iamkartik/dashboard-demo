@@ -4,5 +4,5 @@
 const app = require('./app');
 
 app.listen(process.env.PORT||9000,()=>{
-    console.log('app started');
+    console.log('app started at port',(process.env.PORT||9000));
 })

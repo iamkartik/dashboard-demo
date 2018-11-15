@@ -1,9 +1,10 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {logoutUser,fetchCountrySectorAgg,fetchSectorActivityAgg} from '../actions';
+import {logoutUser,fetchCountrySectorAgg,fetchSectorActivityAgg,
+    fetchCountryAverage,fetchSectorAverage} from '../actions';
 import Header from './Header';
-import {Bar} from 'react-chartjs-2';
+import {Bar,Line} from 'react-chartjs-2';
 
 /** This class displayes two stacked bar graphs
  * 
@@ -12,8 +13,10 @@ class PageOne extends Component{
 
     componentDidMount(){
         // get sector/activity and country/sector aggregations
-        this.props.fetchCountrySectorAgg(10);
-        this.props.fetchSectorActivityAgg(10);
+       // this.props.fetchCountrySectorAgg(10);
+       // this.props.fetchSectorActivityAgg(10);
+        this.props.fetchCountryAverage(10);
+        this.props.fetchSectorAverage(10);
     }
 
     createChartData(data,cat){
@@ -89,6 +92,43 @@ class PageOne extends Component{
         return options;
     }
 
+    createChartDataNew(data,labelName,color){
+        let renderData = {};
+        console.log(data);
+
+        // check ig data exists and has the labelName property
+        if(data && data[labelName] 
+            && data[labelName].data.length>0){
+                console.log(data);
+                // color values for the chart
+                const colors=['rgba(255,99,132,','rgba(140, 234, 110,',
+                            'rgba(228, 90, 68,','rgba(56, 187, 156,'];
+                
+                let values=[],labels=[];
+                // loop and separte the labels and data
+                for(let i=0;i<data[labelName].data.length;i++){
+                    let tmp = Object.values(data[labelName].data[i]);
+                    labels.push(tmp[0]);
+                    values.push(parseFloat(tmp[1]).toFixed(2));
+                }
+                
+            renderData['labels'] = labels;
+            const datasets=[
+                {
+                  label: labelName,
+                  backgroundColor: `${colors[color]}0.5)`,
+                  borderColor: `${colors[color]}1)`,
+                  borderWidth: 1,
+                  hoverBackgroundColor: `${colors[color]}0.7)`,
+                  hoverBorderColor: `${colors[color]}1)`,
+                  data: values
+                }];
+            
+            renderData['datasets']=datasets;
+        }
+        return renderData;
+    }
+
     render(){
         const {auth,agg} = this.props;
     
@@ -98,9 +138,9 @@ class PageOne extends Component{
                 (<Redirect to='/'/>)}
                 <Header />
                 <div className="container">
-                    <div className="row">
-                    <div className="col s12">
-                        <h3>Distribution of Activities across Sectors</h3>
+                   <div className="row">
+                        {/* <div className="col s12">
+                            <h3>Distribution of Activities across Sectors</h3>
                             <Bar data={this.createChartData(agg,'sagg')}
                             options={this.barChartOptions(agg,'sagg')}
                             height={250} />
@@ -110,6 +150,15 @@ class PageOne extends Component{
                             <Bar data={this.createChartData(agg,'sagg')} 
                             options={this.barChartOptions(agg,'sagg')}
                             height={250}/>
+                        </div> */}
+
+                        <div className="col s12">
+                            <h3>Average Loan Amount Across Sectors</h3>
+                            <Bar data={this.createChartDataNew(agg,'sector',1)} height={250}/>
+                        </div>
+                        <div className="col s12">
+                            <h3>Average Loan Amount Across Countries</h3>
+                            <Line data={this.createChartDataNew(agg,'country',3)} height={250}/>
                         </div>
                     </div>
                 </div>
@@ -123,4 +172,5 @@ function mapStateToProps({auth,agg}){
 }
 
 export default connect(mapStateToProps,{logoutUser,
-    fetchCountrySectorAgg,fetchSectorActivityAgg})(PageOne);
+    fetchCountrySectorAgg,fetchSectorActivityAgg,fetchSectorAverage,
+    fetchCountryAverage})(PageOne);
