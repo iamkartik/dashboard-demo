@@ -11,10 +11,10 @@ import logger from 'redux-logger';
 
 
 // create a redux store to save state
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-
-const store = createStore(reducers,{},composeEnhancers(applyMiddleware(reduxThunk,logger)));
+const store = createStore(reducers,{},applyMiddleware(reduxThunk));
+//const store = createStore(reducers,{},composeEnhancers(applyMiddleware(reduxThunk,logger)));
 
 
 ReactDOM.render(
